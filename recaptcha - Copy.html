@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>reCAPTCHA demo: Explicit render after an onload callback</title>
+    <script type="text/javascript">
+        var verifyCallback = function (recaptcha) {
+            console.log("verifyCallback start")
+            //接到回傳值 
+            if (recaptcha.length > 0) {
+                console.log("verifyCallback Sucess")
+            }
+            else {
+                console.log("verifyCallback Fail")
+            }
+            console.log("verifyCallback end")
+        };
+
+        var onloadCallback = function () {
+            console.log("onloadCallback start")
+            grecaptcha.render('googleRecaptchaImg', {
+                //'sitekey': '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', //required
+                'sitekey': '6LcQc2oUAAAAADpt-vhqe2v6JjbX9J4Y_ulDzn5S',
+                'callback': verifyCallback,  // optional  
+                'hl': 'en'
+            });
+            console.log("onloadCallback end")
+        };
+
+    </script>
+</head>
+
+<body>
+    <form action="?" method="POST">
+        <div id="googleRecaptchaImg" class="g-recaptcha"></div>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+    </script>
+</body>
+<style>
+    .g-recaptcha {
+        transform: scale(4.5);
+        -webkit-transform: scale(4.5);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+    }
+</style>
+
+</html>

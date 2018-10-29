@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>reCAPTCHA demo: Explicit render after an onload callback</title>
+    <script type="text/javascript">
+        var onloadCallback = function () {
+            console.log("onloadCallback start")
+            grecaptcha.render('g-recaptcha', {
+                'sitekey': '6LcLQXMUAAAAAKWY_sTVrWLl4cbjAFfxbUFNabjR',
+                'theme': 'light',  // optional   
+                'callback': 'OnSubmitFunction',  // optional  
+                'hl': 'en'
+            });
+            console.log("onloadCallback end")
+        };
+
+        var OnSubmitFunction = function (recaptcha) {
+            //接到回傳值 
+            if (recaptcha.length > 0) {
+                console.log("verifyCallback Sucess")
+            }
+            else {
+                console.log("verifyCallback Fail")
+            }
+        };
+
+    </script>
+    <script>
+/*         function OnSubmitFunction(token) {
+            document.getElementById('form').submit();
+        } */
+    </script>
+</head>
+
+<body>
+    <form action="/post" method="post" id="form">
+        <button type="submit" id="g-recaptcha" class="g-recaptcha">
+            Submit
+        </button>
+    </form>
+
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+<!-- <style>
+    .g-recaptcha {
+        transform: scale(4.5);
+        -webkit-transform: scale(4.5);
+        transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+    }
+</style> -->
+
+</html>
